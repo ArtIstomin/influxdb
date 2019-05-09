@@ -686,6 +686,9 @@ type BuilderConfig struct {
 	Functions []struct {
 		Name string `json:"name"`
 	} `json:"functions"`
+	AggregateWindow struct {
+		Period string `json:"period"`
+	} `json:"aggregateWindow"`
 }
 
 // Axis represents the visible extents of a visualization
