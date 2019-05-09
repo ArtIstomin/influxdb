@@ -1114,16 +1114,13 @@ func (itr *floatReduceFloatIterator) reduce() ([]FloatPoint, error) {
 		rp.Aggregator.AggregateFloat(curr)
 	}
 
-	// Reverse sort points by name & tag if our output is supposed to be ordered.
-	// This is because the final array needs to have the first
-	// point at the end since they are popped off of the end.
+	// Reverse sort points by name & tag.
+	// This ensures a consistent order of output.
 	keys := make([]string, 0, len(m))
 	for k := range m {
 		keys = append(keys, k)
 	}
-	if len(keys) > 1 && itr.opt.Ordered {
-		sort.Sort(reverseStringSlice(keys))
-	}
+	sort.Sort(reverseStringSlice(keys))
 
 	// Assume the points are already sorted until proven otherwise.
 	sortedByTime := true
